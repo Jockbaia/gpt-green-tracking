@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "GPT Green tracker",
+  "version": "1.0",
+  "description": "Track your GPT usage and its environmental impact.",
+  "permissions": ["scripting", "activeTab"],
+  "host_permissions": ["https://chatgpt.com/*"],
+  "content_scripts": [
+    {
+      "matches": ["https://chatgpt.com/*"],
+      "js": [
+        "services/asset.service.js",
+        "services/data.service.js",
+        "services/overlay.service.js",
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "overlay/*",
+        "assets/svg/loading.svg"
+      ],
+      "matches": ["https://chatgpt.com/*"]
+    }
+  ],
+  "action": {
+    "default_popup": "settings.html"
+  }
+}

@@ -1,0 +1,21 @@
+#overlay {
+  position: fixed;
+  bottom: 20px;
+  right: 25px;
+  background: #101010;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 13px;
+  pointer-events: auto;
+}
+
+.overlay__inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.overlay__text {
+  flex: 1;
+  word-break: break-word;
+}
