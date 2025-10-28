@@ -9,7 +9,7 @@
     {
       "matches": ["https://chatgpt.com/*"],
       "js": [
-        "services/asset.service.js",
+        "dist/tokenizer.bundle.js",
         "services/data.service.js",
         "services/overlay.service.js",
         "content.js"
@@ -20,13 +20,15 @@
   "web_accessible_resources": [
     {
       "resources": [
+        "overview/*",
         "overlay/*",
+        "dist/tokenizer.bundle.js",
         "assets/svg/loading.svg"
       ],
-      "matches": ["https://chatgpt.com/*"]
+      "matches": ["https://chatgpt.com/*", "<all_urls>"]
     }
   ],
   "action": {
-    "default_popup": "settings.html"
+    "default_popup": "overview/settings.html"
   }
 }
