@@ -9,7 +9,11 @@
     {
       "matches": ["https://chatgpt.com/*"],
       "js": [
-        "dist/tokenizer.bundle.js",
+        "dist/models/cl100k_base.js",
+        "dist/models/r50k_base.js",
+        "dist/models/p50k_base.js",
+        "dist/models/o200k_base.js",
+        "services/tokenizer-wrapper.js",
         "services/data.service.js",
         "services/overlay.service.js",
         "content.js"

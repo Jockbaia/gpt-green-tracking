@@ -54,10 +54,43 @@
         badge.className = 'ggt__badge';
         div.insertBefore(badge, div.firstChild);
       }
-      // Update content
-      badge.innerHTML = `<span class="ggt__chip">${count} characters</span><span class="ggt__chip">${tokens} tokens</span>`;
+
+      // Get all available models
+      const models = (window.__GGT_tokenizer && typeof window.__GGT_tokenizer.getModels === 'function')
+        ? window.__GGT_tokenizer.getModels() : [];
+
+      const text = getOriginalBubbleText(div);
+
+      // Build badge HTML for each model
+      let html = `<span class="ggt__chip">${count} chars</span>`;
+      models.forEach(model => {
+        let toks = [];
+        try {
+          toks = window.__GGT_tokenizer.encode(text, model);
+        } catch (e) {}
+        html += `<span class="ggt__chip">${toks.length} tokens (${model})</span>`;
+      });
+
+      badge.innerHTML = html;
     } catch (e) {
       console.warn('[GGT] addOrUpdateBadge failed', e);
+    }
+  }
+
+  function getOriginalBubbleText(div) {
+    // Prevent counting badge text
+    let node = div;
+    if (div.firstElementChild && div.firstElementChild.classList.contains('ggt__badge')) {
+      let text = '';
+      for (let i = 1; i < div.childNodes.length; ++i) {
+        const child = div.childNodes[i];
+        if (child.nodeType === Node.TEXT_NODE) text += child.textContent;
+        else if (child.nodeType === Node.ELEMENT_NODE) text += child.innerText || '';
+      }
+      return text.trim();
+    } else {
+      // If no badge, return full text
+      return (div.innerText || '').trim();
     }
   }
 
@@ -76,9 +109,13 @@
         nextCharId += 1;
         d.dataset.assCharId = 'ass-' + nextCharId;
       }
-      const text = (d.innerText || '').trim();
+      const text = getOriginalBubbleText(d);
       const count = text.length;
       const tokens = computeTokenCount(text);
+
+      // Debug: log the content and character count
+      console.log('[GGT] Bubble content:', JSON.stringify(text), '| Characters:', count);
+
       arr.push({ id: d.dataset.assCharId, count, tokens, text });
 
       // Append badge on current div
