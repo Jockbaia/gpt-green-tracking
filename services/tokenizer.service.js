@@ -14,4 +14,4 @@ window.__GGT_tokenizer = {
     'o200k_base'
   ]
 };
-console.log('[GGT] tokenizer-wrapper initialized');
+console.log('[GGT] tokenizer service initialized');
