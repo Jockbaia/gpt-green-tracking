@@ -21,6 +21,7 @@
         "services/data.service.js",
         "services/overlay.service.js",
         "model-picker/model-picker.js",
+        "models.js",
         "content.js"
       ],
       "run_at": "document_idle"

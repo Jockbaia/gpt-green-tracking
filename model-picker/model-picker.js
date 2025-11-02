@@ -48,12 +48,21 @@
     }
   }
 
-  // Get models from tokenizer
-  function getAvailableModels() {
+  /* Get the array of model objects */
+  function getModelCatalog() {
     try {
-      const tok = window.__GGT_tokenizer;
-      if (tok && typeof tok.getModels === 'function') return tok.getModels();
-    } catch (e) { /* ignore */ }
+      if (Array.isArray(window.__GGT_MODELS) && window.__GGT_MODELS.length) {
+        return window.__GGT_MODELS.map(m => ({
+          id: m.id || m.name,
+          name: m.name || m.id,
+          description: m.description || '',
+          path: m.path || ''
+        }));
+      }
+    } catch (e) {
+      console.warn('[GGT] getModelCatalog error', e);
+    }
+
   }
 
   // Publish selection to page + extension storage so other parts update immediately
@@ -94,7 +103,7 @@
     tip.setAttribute('aria-hidden','true');
   }
 
-  // Render model buttons into the picker and attach handlers
+  // Render function uses the catalog and attaches tooltips using the description.
   function renderButtons(models, selected) {
     const wrap = document.getElementById('ggt-btn-wrap');
     if (!wrap) return;
@@ -102,26 +111,32 @@
     models.forEach(m => {
       const b = document.createElement('button');
       b.type = 'button';
-      b.className = 'ggt-btn' + (m === selected ? ' ggt-btn-active' : '');
-      b.textContent = m;
-      b.dataset.model = m;
+      b.className = 'ggt-btn' + (m.id === selected ? ' ggt-btn-active' : '');
+      b.textContent = m.name;
+      b.dataset.model = m.id;
+
+      // Click: publish and update active class
       b.addEventListener('click', () => {
-        publishModelSelection(m);
-        Array.from(wrap.children).forEach(ch => ch.classList.toggle('ggt-btn-active', ch.dataset.model === m));
+        publishModelSelection(m.id);
+        Array.from(wrap.children).forEach(ch => ch.classList.toggle('ggt-btn-active', ch.dataset.model === m.id));
       });
-      b.addEventListener('mouseenter', () => showTooltip(b, `Model: ${m} — click to select`));
+
+      // Tooltip shows description if present; fallback to "Model: <id>"
+      const tipText = m.description && m.description.length ? m.description : `Model: ${m.name} — click to select`;
+      b.addEventListener('mouseenter', () => showTooltip(b, tipText));
       b.addEventListener('mouseleave', hideTooltip);
-      b.addEventListener('focus', () => showTooltip(b, `Model: ${m} — press Enter to select`));
+      b.addEventListener('focus', () => showTooltip(b, tipText));
       b.addEventListener('blur', hideTooltip);
+
       wrap.appendChild(b);
     });
   }
 
-  // Rebuild buttons when tokenizer becomes available or selection changes externally
+  // Rebuild checks the catalog and selected model (keeps code maintainable)
   function tryRebuild() {
-    const models = getAvailableModels();
-    const selected = window.__GGT_token_model || localStorage.getItem('ggt__token_model') || models[0];
-    renderButtons(models, selected);
+    const catalog = getModelCatalog();
+    const selected = window.__GGT_token_model || localStorage.getItem('ggt__token_model') || (catalog[0] && catalog[0].id);
+    renderButtons(catalog, selected);
   }
 
   // Load assets and initialize UI
