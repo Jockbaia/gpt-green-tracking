@@ -3,11 +3,15 @@
   "name": "GPT Green tracker",
   "version": "1.0",
   "description": "Track your GPT usage and its environmental impact.",
-  "permissions": ["scripting", "activeTab"],
-  "host_permissions": ["https://chatgpt.com/*"],
+  "permissions": ["scripting", "activeTab", "tabs"],
+  "host_permissions": [
+    "https://chatgpt.com/*",
+    "https://chat.openai.com/*",
+    "<all_urls>"
+  ],
   "content_scripts": [
     {
-      "matches": ["https://chatgpt.com/*"],
+      "matches": ["https://chatgpt.com/*", "https://chat.openai.com/*"],
       "js": [
         "assets/models/cl100k_base.js",
         "assets/models/r50k_base.js",
@@ -16,6 +20,7 @@
         "services/tokenizer.service.js",
         "services/data.service.js",
         "services/overlay.service.js",
+        "model-picker/model-picker.js",
         "content.js"
       ],
       "run_at": "document_idle"
@@ -26,12 +31,12 @@
       "resources": [
         "overview/*",
         "overlay/*",
-        "assets/svg/loading.svg"
+        "assets/models/*.js",
+        "assets/svg/loading.svg",
+        "model-picker/*"
       ],
-      "matches": ["https://chatgpt.com/*", "<all_urls>"]
+      "matches": ["https://chatgpt.com/*", "https://chat.openai.com/*", "<all_urls>"]
     }
   ],
-  "action": {
-    "default_popup": "settings.html"
-  }
+  "action": { "default_popup": "settings.html" }
 }

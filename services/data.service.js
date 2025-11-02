@@ -15,6 +15,7 @@
         gap: 8px;
         font-size: 12px;
         color: #fff;
+        align-items: center;
       }
       .ggt__badge .ggt__chip {
         background: rgba(255,255,255,0.08);
@@ -23,7 +24,6 @@
         font-weight: 500;
         color: #e6f4ff;
       }
-      /* ensure the badge doesn't break layout too much */
       ${AGENT__BUBBLE} > .ggt__badge + * { margin-top: 6px; }
     `;
     document.head.appendChild(s);
@@ -33,14 +33,16 @@
     text = String(text || '');
     try {
       const tok = window.__GGT_tokenizer;
+      const model = window.__GGT_token_model || 'cl100k_base';
       if (tok && typeof tok.encode === 'function') {
-        const encoded = tok.encode(text);
+        const encoded = tok.encode(text, model);
         if (Array.isArray(encoded)) return encoded.length;
         if (typeof encoded === 'number') return encoded;
       }
     } catch (e) {
       console.warn('[GGT] tokenizer.encode failed', e);
     }
+    return 0;
   }
 
   function addOrUpdateBadge(div, count, tokens) {
@@ -55,21 +57,24 @@
         div.insertBefore(badge, div.firstChild);
       }
 
-      // Get all available models
+      // Only show the selected model
       const models = (window.__GGT_tokenizer && typeof window.__GGT_tokenizer.getModels === 'function')
         ? window.__GGT_tokenizer.getModels() : [];
 
+      const selectedModel = window.__GGT_token_model || localStorage.getItem('ggt__token_model') || models[0];
+
       const text = getOriginalBubbleText(div);
 
-      // Build badge HTML for each model
-      let html = `<span class="ggt__chip">${count} chars</span>`;
-      models.forEach(model => {
-        let toks = [];
-        try {
-          toks = window.__GGT_tokenizer.encode(text, model);
-        } catch (e) {}
-        html += `<span class="ggt__chip">${toks.length} tokens (${model})</span>`;
-      });
+      // Compute tokens for the selected model
+      let toks = [];
+      try {
+        toks = window.__GGT_tokenizer.encode(text, selectedModel);
+      } catch (e) {
+        toks = [];
+      }
+
+      const html = `<span class="ggt__chip">${count} chars</span>
+                    <span class="ggt__chip">${toks.length} tokens</span>`;
 
       badge.innerHTML = html;
     } catch (e) {
@@ -85,7 +90,7 @@
       for (let i = 1; i < div.childNodes.length; ++i) {
         const child = div.childNodes[i];
         if (child.nodeType === Node.TEXT_NODE) text += child.textContent;
-        else if (child.nodeType === Node.ELEMENT_NODE) text += child.innerText || '';
+        else if (child.nodeType === Node.ELEMENT_NODE) text += (child.innerText || '');
       }
       return text.trim();
     } else {

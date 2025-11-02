@@ -1,0 +1,63 @@
+/* Model picker overlay styles (kept minimal and scoped by id/class) */
+#ggt-overlay-ui.ggt-overlay-ui {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 2147483647;
+  font-family: Arial, Helvetica, sans-serif;
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  padding: 8px;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  backdrop-filter: blur(4px);
+}
+
+.ggt-overlay-inner { display:flex; gap:8px; align-items:center; }
+
+.ggt-overlay-label {
+  font-size: 12px;
+  font-weight: 600;
+  margin-right: 6px;
+  color: #fff;
+}
+
+/* Button container */
+.ggt-btn-wrap { display:flex; gap:6px; }
+
+/* Buttons */
+.ggt-btn {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+.ggt-btn:focus { outline: 2px solid rgba(127,183,255,0.4); }
+
+/* Active button */
+.ggt-btn.ggt-btn-active {
+  background: #e6f4ff;
+  color: #111;
+  border-color: #7fb7ff;
+  font-weight: 600;
+}
+
+/* Tooltip */
+#ggt-overlay-tooltip.ggt-overlay-tooltip {
+  position: fixed;
+  pointer-events: none;
+  background: rgba(0,0,0,0.85);
+  color: #fff;
+  padding: 6px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+  display: none;
+  z-index: 2147483648;
+}
