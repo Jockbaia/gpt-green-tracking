@@ -22,7 +22,12 @@
         "services/overlay.service.js",
         "model-picker/model-picker.js",
         "models.js",
-        "content.js"
+        "content.js",
+        "models/pues.js",
+        "components/pue-picker/pue-picker.js"
+      ],
+      "css": [
+        "components/pue-picker/pue-picker.css"
       ],
       "run_at": "document_idle"
     }
@@ -31,10 +36,11 @@
     {
       "resources": [
         "overview/*",
-        "overlay/*",
         "assets/models/*.js",
         "assets/svg/loading.svg",
-        "model-picker/*"
+        "model-picker/*",
+        "models/pues.js",
+        "components/pue-picker/*"
       ],
       "matches": ["https://chatgpt.com/*", "https://chat.openai.com/*", "<all_urls>"]
     }

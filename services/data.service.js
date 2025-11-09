@@ -1,6 +1,7 @@
 (function () {
 
   const AGENT__BUBBLE = 'div[data-message-author-role="assistant"]';
+  const PUE_STORAGE_KEY = 'ggt__selected_pue';
   let nextCharId = parseInt(window.__GGT_nextCharId || 0, 10) || 0;
   let charArray = window.__GGT_charArray || [];
 
@@ -73,8 +74,31 @@
         toks = [];
       }
 
-      const html = `<span class="ggt__chip">${count} chars</span>
-                    <span class="ggt__chip">${toks.length} tokens</span>`;
+      // Get the selected PUE from local storage
+      const selectedPue = JSON.parse(localStorage.getItem(PUE_STORAGE_KEY)) || { value: 1.0 };
+
+      // Calculate watts consumed
+      const FLOPS_PER_TOKEN = 3e11;            
+      const GPU_FLOPS_PER_JOULE = 7.8e11;     
+      const JOULES_PER_TOKEN = FLOPS_PER_TOKEN / GPU_FLOPS_PER_JOULE; 
+      const totalJoules = tokens * JOULES_PER_TOKEN * selectedPue.value;
+      const totalWh = totalJoules / 3600; // 1 Wh = 3600 J
+      const mWh = totalWh * 1000;
+
+      // Calculate gCO2 emissions
+      const CO2_PER_KWH = 475;
+      const totalCO2 = (totalWh / 1000) * CO2_PER_KWH;
+
+      // Display values
+      const mwattsConsumed = mWh.toFixed(4);
+      const gCO2 = totalCO2.toFixed(4);
+
+      const html = `
+        <span class="ggt__chip">${count} chars</span>
+        <span class="ggt__chip">${toks.length} tokens</span>
+        <span class="ggt__chip">${mwattsConsumed} mWh</span>
+        <span class="ggt__chip">${gCO2} gCO₂</span>
+      `;
 
       badge.innerHTML = html;
     } catch (e) {
@@ -119,7 +143,7 @@
       const tokens = computeTokenCount(text);
 
       // Debug: log the content and character count
-      console.log('[GGT] Bubble content:', JSON.stringify(text), '| Characters:', count);
+      // console.log('[GGT] Bubble content:', JSON.stringify(text), '| Characters:', count);
 
       arr.push({ id: d.dataset.assCharId, count, tokens, text });
 
