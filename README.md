@@ -1,5 +1,7 @@
 # GPT Green Tracker
 
+![GPT Green Tracker in Action](assets/images/screenshot.png)
+
 **GPT Green Tracker** is a browser extension that helps you monitor the environmental impact of your AI usage. It calculates the energy consumption and carbon footprint for each AI-generated response. The extension provides insightful metrics and allows you to customize energy models and data center efficiency settings to reflect real-world usage.
 
 ## Features
