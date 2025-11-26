@@ -7,7 +7,7 @@
 */
 
 (async function initModelPicker() {
-  const BASE = 'model-picker/';
+  const BASE = 'components/model-picker/';
   const HTML_PATH = BASE + 'model-picker.html';
   const CSS_PATH = BASE + 'model-picker.css';
 

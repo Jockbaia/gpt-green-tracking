@@ -1,4 +1,3 @@
-/* Model picker overlay styles (kept minimal and scoped by id/class) */
 #ggt-overlay-ui.ggt-overlay-ui {
   position: fixed;
   top: 12px;
@@ -14,6 +13,12 @@
   gap: 8px;
   align-items: center;
   backdrop-filter: blur(4px);
+  transition: opacity 0.8s ease;
+  opacity: 5%;
+}
+
+#ggt-overlay-ui.ggt-overlay-ui:hover {
+  opacity: 100%;
 }
 
 .ggt-overlay-inner { display:flex; gap:8px; align-items:center; }
@@ -25,10 +30,8 @@
   color: #fff;
 }
 
-/* Button container */
 .ggt-btn-wrap { display:flex; gap:6px; }
 
-/* Buttons */
 .ggt-btn {
   font-size: 12px;
   padding: 4px 8px;
@@ -40,7 +43,6 @@
 }
 .ggt-btn:focus { outline: 2px solid rgba(127,183,255,0.4); }
 
-/* Active button */
 .ggt-btn.ggt-btn-active {
   background: #e6f4ff;
   color: #111;
@@ -48,7 +50,6 @@
   font-weight: 600;
 }
 
-/* Tooltip */
 #ggt-overlay-tooltip.ggt-overlay-tooltip {
   position: fixed;
   pointer-events: none;

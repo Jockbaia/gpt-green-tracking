@@ -1,18 +1,24 @@
 #ggt-pue-picker {
-    position: fixed;
-    top: 65px;
-    right: 12px;
-    z-index: 999999999;
-    font-family: Arial, Helvetica, sans-serif;
-    background: rgba(0, 0, 0, 0.55);
-    color: #fff;
-    padding: 8px;
-    border-radius: 8px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    backdrop-filter: blur(4px);
+  position: fixed;
+  top: 65px;
+  right: 12px;
+  z-index: 999999999;
+  font-family: Arial, Helvetica, sans-serif;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  padding: 8px;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  backdrop-filter: blur(4px);
+  transition: opacity 0.8s ease;
+  opacity: 5%;
+}
+
+#ggt-pue-picker:hover {
+  opacity: 100%;
 }
 
 .ggt-pue-label {

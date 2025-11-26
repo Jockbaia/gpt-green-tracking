@@ -10,16 +10,6 @@ async function main() {
     } catch (e) { console.error('[GGT] getBubbleInfo error', e); }
   }
 
-  // Send updates to overlay service
-  function sendCount(bubbleDiv) {
-    try {
-      if (overlayService && typeof overlayService.sendCount === 'function') {
-        overlayService.sendCount(bubbleDiv);
-        return;
-      }
-    } catch (e) { console.error('[GGT] sendCount error', e); }
-  }
-
   // #region Utilities
 
   function debounce(fn, ms) {
@@ -32,7 +22,6 @@ async function main() {
 
   const update = debounce(() => {
     const bubbleDiv = getBubbleInfo();
-    sendCount(bubbleDiv);
   }, 120);
 
   try {

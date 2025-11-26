@@ -19,8 +19,7 @@
         "assets/models/o200k_base.js",
         "services/tokenizer.service.js",
         "services/data.service.js",
-        "services/overlay.service.js",
-        "model-picker/model-picker.js",
+        "components/model-picker/model-picker.js",
         "models.js",
         "content.js",
         "models/pues.js",
@@ -38,7 +37,7 @@
         "overview/*",
         "assets/models/*.js",
         "assets/svg/loading.svg",
-        "model-picker/*",
+        "components/model-picker/*",
         "models/pues.js",
         "components/pue-picker/*"
       ],
