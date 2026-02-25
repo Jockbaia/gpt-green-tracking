@@ -56,7 +56,8 @@
           id: m.id || m.name,
           name: m.name || m.id,
           description: m.description || '',
-          path: m.path || ''
+          path: m.path || '',
+          default: m.default || false
         }));
       }
     } catch (e) {
@@ -111,7 +112,7 @@
     models.forEach(m => {
       const b = document.createElement('button');
       b.type = 'button';
-      b.className = 'ggt-btn' + (m.id === selected ? ' ggt-btn-active' : '');
+      b.className = 'ggt-btn' + (m.id === selected ? ' ggt-btn-active' : '') + (m.default ? ' ggt-btn-default' : '');
       b.textContent = m.name;
       b.dataset.model = m.id;
 

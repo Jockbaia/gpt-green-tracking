@@ -46,12 +46,12 @@
         color: #ffb74d;
       }
       .ggt__chip--co2 {
-        border: 1px solid #81c784;
-        color: #81c784;
+        border: 1px solid #81a9c7ff;
+        color: #81b1c7ff;
       }
       .ggt__chip--grill {
-        border: 1px solid #ef9a9a;
-        color: #ef9a9a;
+        border: 1px solid #9aefbcff;
+        color: #9aefb2ff;
       }
       .ggt__chip--image {
         border: 1px solid #ba68c8;
@@ -146,8 +146,8 @@
         <span class="ggt__chip ggt__chip--image">🖼️ ${width}×${height}px</span>
         <span class="ggt__chip">${tokens} tokens</span>
         <span class="ggt__chip ggt__chip--mwh">⚡${mWh.toFixed(4)} mWh</span>
-        <span class="ggt__chip ggt__chip--co2">🌿${totalCO2.toFixed(4)} gCO₂</span>
-        <span class="ggt__chip ggt__chip--grill">🥩${grillingTime}s</span>
+        <span class="ggt__chip ggt__chip--co2">🏭${totalCO2.toFixed(4)} gCO₂</span>
+        <span class="ggt__chip ggt__chip--grill">🥦${grillingTime}s</span>
       `;
 
       let targetParent = img.parentNode;
@@ -200,8 +200,8 @@
         <span class="ggt__chip">${count} chars</span>
         <span class="ggt__chip">${tokens} tokens</span>
         <span class="ggt__chip ggt__chip--mwh">⚡${mWh.toFixed(4)} mWh</span>
-        <span class="ggt__chip ggt__chip--co2">🌿${totalCO2.toFixed(4)} gCO₂</span>
-        <span class="ggt__chip ggt__chip--grill">🥩${grillingTime}s</span>
+        <span class="ggt__chip ggt__chip--co2">🏭${totalCO2.toFixed(4)} gCO₂</span>
+        <span class="ggt__chip ggt__chip--grill">🥦${grillingTime}s</span>
       `;
     } catch (e) {
       console.warn('[GGT] Failed to add or update badge:', e);

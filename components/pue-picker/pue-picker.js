@@ -57,6 +57,10 @@ console.log('[GGT] chrome.runtime:', chrome.runtime);
       button.className = 'ggt-pue-btn';
       button.textContent = pue.name;
 
+      if (pue.default) {
+        button.classList.add('ggt-pue-default');
+      }
+
       if (selectedPue && selectedPue.id === pue.id) {
         button.classList.add('active');
       }

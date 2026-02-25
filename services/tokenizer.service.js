@@ -8,10 +8,10 @@ window.__GGT_tokenizer = {
     return [];
   },
   getModels: () => [
+    'o200k_base',
     'cl100k_base',
     'r50k_base',
     'p50k_base',
-    'o200k_base'
   ]
 };
 console.log('[GGT] tokenizer service initialized');
