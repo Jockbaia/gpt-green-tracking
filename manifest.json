@@ -1,8 +1,23 @@
 {
   "manifest_version": 3,
-  "name": "GPT Green tracker",
-  "version": "1.0",
-  "description": "Track your GPT usage and its environmental impact.",
+  "name": "GPT Green Tracker",
+  "version": "1.0.0",
+  "description": "Track the environmental impact of your conversations with ChatGPT",
+  
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png", 
+    "128": "icons/icon128.png"
+  },
+  
+  "action": {
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  
   "permissions": ["scripting", "activeTab", "tabs"],
   "host_permissions": [
     "https://chatgpt.com/*",
@@ -43,6 +58,5 @@
       ],
       "matches": ["https://chatgpt.com/*", "https://chat.openai.com/*", "<all_urls>"]
     }
-  ],
-  "action": { "default_popup": "settings.html" }
+  ]
 }
