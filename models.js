@@ -4,30 +4,30 @@
 window.__GGT_MODELS = [
   {
     id: 'o200k_base',
-    name: 'o200k_base',
-    description: 'Extended encoder for non-UTF bytes, large vocab. Used by the most recent OpenAI models',
+    name: 'GPT-5.x & O1/3',
+    description: '[o200k_base] Current default OpenAI tokenizer, used by GPT-5.x and O1/3 models.',
     path: 'assets/models/o200k_base.js',
     default: true
   },
   {
     id: 'cl100k_base',
-    name: 'cl100k_base',
-    description: 'Recommended for modern OpenAI models (gpt-4/gpt-3.5-turbo)',
+    name: 'GPT-4 & GPT-3.5 (legacy)',
+    description: '[cl100k_base] An older tokenizer used by GPT-4 and GPT-3.5 models.',
     path: 'assets/models/cl100k_base.js',
     default: false
   },
   {
     id: 'r50k_base',
-    name: 'r50k_base',
-    description: 'BPE used by some legacy models, different tokenization from cl100k',
+    name: 'GPT-3 (legacy)',
+    description: '[r50k_base] A less efficient tokenizer used by GPT-3 models.',
     path: 'assets/models/r50k_base.js',
     default: false
   },
-  {
+  /*{
     id: 'p50k_base',
     name: 'p50k_base',
     description: 'Common tokenizer, useful for compatibility testing',
     path: 'assets/models/p50k_base.js',
     default: false
-  }
+  }*/
 ];
